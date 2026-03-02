@@ -11,18 +11,32 @@ enum ItemType {
     case sword
     case potion
     case arrow
+    case armor
 
     var isStackable: Bool {
         switch self {
-        case .sword: return false
+        case .sword, .armor: return false
         case .potion, .arrow: return true
         }
     }
 
     var isConsumable: Bool {
         switch self {
-        case .sword, .arrow: return false
+        case .sword, .arrow, .armor: return false
         case .potion: return true
+        }
+    }
+
+    var weight: Int {
+        switch self {
+        case .sword:
+            10
+        case .potion:
+            1
+        case .arrow:
+            1
+        case .armor:
+            20
         }
     }
 }
@@ -37,6 +51,10 @@ struct ItemStack {
         }
         quantity += amount
     }
+
+    var totalWeight: Int {
+        itemType.weight * quantity
+    }
 }
 
 extension Array where Element == ItemStack {
@@ -47,7 +65,10 @@ extension Array where Element == ItemStack {
 
 struct Inventory {
     private(set) var items: [ItemStack] = []
-
+    let maxWeight: Int = 50
+    var totalWeight: Int {
+        items.reduce(0, { $0 + $1.totalWeight })
+    }
     mutating func add(_ itemType: ItemType, quantity: Int = 1) {
         if itemType.isStackable {
             addItemToStack(itemType: itemType, quantity: quantity)
