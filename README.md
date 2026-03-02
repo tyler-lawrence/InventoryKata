@@ -1,0 +1,9 @@
+    - Add armor
+    - Add a feature so that items have a weight and the inventory total weight can’t exceed a given value
+    - Implement player health & health potion effects
+    - Implement a filter / search in the inventory
+    - Build out the items a bit more
+        - Items have stats
+        - Different types of items
+            - ex: Iron sword, steel sword, magic sword
+        - Consumables have effects on the player
