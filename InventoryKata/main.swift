@@ -29,14 +29,10 @@ enum ItemType {
 
     var weight: Int {
         switch self {
-        case .sword:
-            10
-        case .potion:
-            1
-        case .arrow:
-            1
-        case .armor:
-            20
+        case .sword: 10
+        case .potion: 1
+        case .arrow: 1
+        case .armor: 20
         }
     }
 }
