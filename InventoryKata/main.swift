@@ -40,16 +40,15 @@ enum ItemType {
 struct ItemStack {
     private(set) var itemType: ItemType
     private(set) var quantity: Int
+    var totalWeight: Int {
+        itemType.weight * quantity
+    }
 
     mutating func addItem(amount: Int = 1) {
         guard itemType.isStackable else {
             return
         }
         quantity += amount
-    }
-
-    var totalWeight: Int {
-        itemType.weight * quantity
     }
 }
 
@@ -65,6 +64,7 @@ struct Inventory {
     var totalWeight: Int {
         items.reduce(0, { $0 + $1.totalWeight })
     }
+
     mutating func add(_ itemType: ItemType, quantity: Int = 1) {
         if itemType.isStackable {
             addItemToStack(itemType: itemType, quantity: quantity)
