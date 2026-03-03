@@ -24,15 +24,15 @@ enum ItemType: Hashable {
 
     var isStackable: Bool {
         switch self {
-        case .sword, .armor: return false
-        case .potion, .arrow: return true
+        case .sword, .armor: false
+        case .potion, .arrow: true
         }
     }
 
     var isConsumable: Bool {
         switch self {
-        case .sword, .arrow, .armor: return false
-        case .potion: return true
+        case .sword, .arrow, .armor: false
+        case .potion: true
         }
     }
 
