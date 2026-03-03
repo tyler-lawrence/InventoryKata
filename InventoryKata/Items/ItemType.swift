@@ -44,4 +44,13 @@ enum ItemType: Hashable {
         case .armor: 20
         }
     }
+
+    var pricePerUnit: Decimal {
+        switch self {
+        case .armor: 10
+        case .arrow: 1
+        case .potion: 1
+        case .sword: 15
+        }
+    }
 }

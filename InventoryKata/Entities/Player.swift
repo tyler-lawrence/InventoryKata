@@ -7,7 +7,8 @@
 
 import Foundation
 
-struct Player {
+struct Player: MarketPlayer {
     let name: String
     var inventory: Inventory = Inventory()
+    var money: Decimal = 100
 }

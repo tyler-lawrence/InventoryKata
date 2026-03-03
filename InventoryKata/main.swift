@@ -7,12 +7,27 @@
 
 import Foundation
 
-var playerInventory = Inventory(items: [
-    ItemType.sword.id: ItemStack(itemType: .sword, quantity: 1),
-    ItemType.potion.id: ItemStack(itemType: .potion, quantity: 2),
-])
+var player = Player(name: "Adventurer")
+var merchant = Merchant(
+    inventory: Inventory(items: [
+        ItemStack(itemType: .armor, quantity: 1),
+        ItemStack(itemType: .sword, quantity: 1),
+        ItemStack(itemType: .potion, quantity: 10)
+    ]),
+    money: 100
+)
 
-var shop = Inventory(items: [
-    ItemType.sword.id: ItemStack(itemType: .sword, quantity: 1),
-    ItemType.potion.id: ItemStack(itemType: .potion, quantity: 2),
-])
+let market = Market(merchant: &merchant, player: &player)
+
+merchant.inventory.display()
+
+//UserRequest.request<Int>(ofType: Int.self, message:"enter a number")
+
+//UserRequest.requestInt(message: "enter a number")
+//UserRequest.requestBool(message: "proceed?")
+
+
+//var shop1 = Shop(inventory: Inventory.sample, money: 100)
+//var shop2 = Shop(inventory: Inventory.sample, money: 100)
+//
+//
