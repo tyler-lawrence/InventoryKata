@@ -14,10 +14,17 @@ struct ItemStack {
         itemType.weight * quantity
     }
 
-    mutating func addItem(amount: Int = 1) {
+    mutating func add(amount: Int = 1) {
         guard itemType.isStackable else {
             return
         }
         quantity += amount
+    }
+
+    mutating func remove(amount: Int = 1) {
+        guard itemType.isStackable, amount <= quantity else {
+            return
+        }
+        quantity -= amount
     }
 }

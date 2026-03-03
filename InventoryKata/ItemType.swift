@@ -7,11 +7,20 @@
 
 import Foundation
 
-enum ItemType {
+enum ItemType: Hashable {
     case sword
     case potion
     case arrow
     case armor
+
+    var id: String {
+        switch self {
+        case .sword: "sword"
+        case .potion: "potion"
+        case .arrow: "arrow"
+        case .armor: "armor"
+        }
+    }
 
     var isStackable: Bool {
         switch self {

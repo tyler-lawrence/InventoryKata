@@ -8,29 +8,25 @@
 import Foundation
 
 struct Inventory {
-    private(set) var items: [ItemStack] = []
+    typealias itemID = String
+    //TODO: currently there can not be two swords but swords don't stack
+    private(set) var items: [itemID: ItemStack] = [:]
     let maxWeight: Int = 50
     var totalWeight: Int {
-        items.reduce(0, { $0 + $1.totalWeight })
+        items.values.reduce(0) { $0 + $1.totalWeight }
     }
 
     mutating func add(_ itemType: ItemType, quantity: Int = 1) {
         if itemType.isStackable {
             addItemToStack(itemType: itemType, quantity: quantity)
         } else {
-            items.append(ItemStack(itemType: itemType, quantity: 1))
+            items[itemType.id] = ItemStack(itemType: itemType, quantity: quantity)
         }
     }
 
-    mutating func addItemToStack(itemType: ItemType, quantity: Int) {
-        if let stackIndex = items.indexFor(itemType) {
-            self.items[stackIndex].addItem()
-        } else {
-            items.append(ItemStack(itemType: itemType, quantity: quantity))
+    private mutating func addItemToStack(itemType: ItemType, quantity: Int) {
+        if let _ = items[itemType.id] {
+            items[itemType.id]!.add(amount: quantity)
         }
-    }
-
-    private func indexForItemStack(_ itemStack: ItemStack) -> Int? {
-        items.firstIndex(where: { $0.itemType == itemStack.itemType } )
     }
 }
